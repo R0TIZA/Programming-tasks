@@ -14,7 +14,7 @@ a = \frac{\sqrt{|x-1|} - \sqrt[3]{|y|}}{1 + \frac{x^2}{2} + \frac{y^2}{4}}
 $$
 
 $$
-b = x \bigl( \operatorname{arcctg} z + e^{-(x+3)} \bigr)
+b = x \bigl( \text{arcctg } z + e^{-(x+3)} \bigr)
 $$
 
 ---
