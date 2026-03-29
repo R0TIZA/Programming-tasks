@@ -19,7 +19,7 @@ $$
 
 Решение на Python:
 
-```python:Task1/Main.py```
+```python:Task 1/Main.py```
 
 ---
 
