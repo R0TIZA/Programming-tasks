@@ -1,20 +1,27 @@
 name: Embed code in README
 
 on:
+  push:
+    branches:
+      - main
+      - master
   pull_request:
     branches:
       - main
+      - master
   workflow_dispatch:
 
 jobs:
   embed-code:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
       
       - name: Setup Python
@@ -28,8 +35,19 @@ jobs:
       
       - name: Commit changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git diff --quiet && git diff --staged --quiet || git commit -m "docs: update embedded code"
-          git push
+          # Проверяем, есть ли изменения
+          if [[ -n $(git status --porcelain README.md) ]]; then
+            git config --local user.name "github-actions[bot]"
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "docs: update embedded code"
+            
+            # Пытаемся запушить (для pull_request нужен особый подход)
+            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+              git push origin HEAD:${{ github.head_ref }}
+            else
+              git push
+            fi
+          else
+            echo "No changes to commit"
+          fi
