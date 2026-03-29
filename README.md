@@ -31,7 +31,16 @@ $$
 
 Решение на Python:
 
-```python:Task 2/Main_A.py```
+```python
+if __name__ == '__main__':
+    x = float(input('Введите X: '))
+    y = float(input('Введите Y: '))
+    if (x<y):
+        z = x
+        x = y
+        y = z
+    print(f'X = {x}, Y = {y}')
+```
 
 #### Б (Задачи на применение оператора выбора `switch … case …`)
 
@@ -45,7 +54,21 @@ $$
 
 Решение на Python:
 
-```python:Task 2/Main_B.py```
+```python
+if __name__ == '__main__':
+    mode = int(input('Введите режим работы (1-4): '))
+    match mode:
+        case 1:
+            print('Рекомендуемые параметры для режима стирки \'Хлопок\':\nТемпература: 30-40°C\nВремя стирки: 1-2 часа')
+        case 2:
+            print('Рекомендуемые параметры для режима стирки \'Синтетика\':\nТемпература: 30-40°C\nВремя стирки: 45-60 минут')
+        case 3:
+            print('Рекомендуемые параметры для режима стирки \'Шерсть\':\nТемпература: 20-30°C\nВремя стирки: 40-55 минут')
+        case 4:
+            print('Рекомендуемые параметры для режима стирки \'Быстрая стирка\':\nТемпература: 30-40°C\nВремя стирки: 15-30 минут')
+        case _:
+            print('Неизвестный режим стирки!')
+```
 
 ---
 
@@ -57,7 +80,17 @@ $$
 
 Решение на Python:
 
-```python:Task 3/Main_A.py```
+```python
+from math import sin
+
+if __name__ == '__main__':
+    THRESHOLD = 1e-4
+    x = float(input('Введите X: '))
+    y = sin(x)
+    while (abs(y)>=THRESHOLD):
+        y = sin(y)
+    print(f'Y = {y}')
+```
 
 #### Б (Задачи для применения цикла с параметром)
 
@@ -65,4 +98,15 @@ $$
 
 Решение на Python:
 
-```python:Task 3/Main_B.py```
+```python
+if __name__ == '__main__':
+    nums = [float(num) for num in input('Введите последовательность числе через пробел:\n').split(' ')]
+    previous = nums[0]
+    isIncreasing = True
+    for num in nums:
+        if num < previous:
+            isIncreasing = False
+            break
+        previous = num
+    print(f'Числа {'не ' if not isIncreasing else ''}образуют возрастающую последовательность')
+```
