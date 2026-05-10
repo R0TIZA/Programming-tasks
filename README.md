@@ -147,7 +147,20 @@ if __name__ == '__main__':
 
 Решение на Python:
 
-```python:Task 4/Main_A.py```
+```python
+nums = [int(num) for num in input('Введите массив чисел через пробел:\n').split(' ')]
+zero_counter = 0
+for num_index in range(len(nums)):
+    if nums[num_index] == 0:
+        zero_counter += 1
+    else:
+        nums[num_index-zero_counter] = nums[num_index]
+    
+    if len(nums) - (num_index + 1) <= zero_counter:
+        nums[num_index] = 0
+
+print(f'Отсортированный массив: {nums}')
+```
 
 #### Б (Задачи на двумерные массивы)
 
@@ -155,7 +168,44 @@ if __name__ == '__main__':
 
 Решение на Python:
 
-```python:Task 4/Main_B.py```
+```python
+INPUT_EXAMPLE = '''
+Пример ввода:
+1 2 3
+4 5 6
+7 8 9
+
+*Размерность матрицы произвольная
+
+'''
+
+matrix = []
+matrix.append([int(num) for num in input(f'{INPUT_EXAMPLE}Введите матрицу:\n').split(' ')])
+for row_index in range(1, len(matrix[0])):
+    matrix.append([int(num) for num in input('').split(' ')])
+
+max_value = float("-inf")
+coords = []
+
+for row_index in range(len(matrix)):
+    for col_index in range(len(matrix[row_index])):
+        num = matrix[row_index][col_index]
+        if num > max_value:
+            max_value = num
+            coords = []
+            coords.append([row_index, col_index])
+        elif num == max_value:
+            coords.append([row_index, col_index])
+
+for coord in coords:
+    row_index = coord[0]
+    col_index = coord[1]
+    matrix[row_index][col_index] = 0
+
+print('\nНовая матрица:\n')
+for row in matrix:
+    print(" ".join(map(str, row)))
+```
 
 ---
 
@@ -191,7 +241,21 @@ if __name__ == '__main__':
 
 Решение на Python:
 
-```python:Task 7/Main_A.py```
+```python
+import random
+
+FILE_NAME = './Task 7/File_A.txt'
+nums = []
+
+while len(nums) < 10:
+    num = random.randint(1, 10**5)
+    if(num%3 == 0 or num%7 == 0):
+        nums.append(num)
+
+
+with open(file=FILE_NAME, mode='w') as file:
+    file.write(', '.join(map(str, nums)))
+```
 
 #### Б (Задачи на создание файла, его запись  и считывание из файла)
 
@@ -199,4 +263,18 @@ if __name__ == '__main__':
 
 Решение на Python:
 
-```python:Task 7/Main_B.py```
+```python
+FILE_NAME = './Task 7/File_B.txt'
+
+input_string = input('Введите текст:\n')
+
+with open(FILE_NAME, 'r+', encoding='utf-8') as file:
+    file.write(input_string)
+    file.seek(0)
+    sentences_from_file = [sentence for sentence in file.read().split('.') if sentence]
+    word = input('\nВведите слово: ')
+    print('')
+    for sentence in sentences_from_file:
+        occurrences_amount = sentence.count(word)
+        print(f'{sentence}. Количество вхождений слова {word} в предложение - {occurrences_amount}.')
+```
