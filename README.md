@@ -217,7 +217,7 @@ for row in matrix:
 
 Решение на Python:
 
-```python:Task 5/Main_A.py```
+```python:Task 5/Main.py```
 
 ---
 
@@ -229,7 +229,7 @@ for row in matrix:
 
 Решение на Python:
 
-```python:Task 6/Main_A.py```
+```python:Task 6/Main.py```
 
 ---
 
