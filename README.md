@@ -19,7 +19,39 @@ $$
 
 Решение на Python:
 
-```python:Task 1/Main.py```
+```python
+from math import *
+
+
+def calculate_a(x: str, y: str) -> float:
+    try:
+        x = float(x)
+        y = float(y)
+    except:
+        raise ValueError("X, Y и Z должны быть типа flat или int")
+
+    return round((sqrt(abs(x-1))-cbrt(abs(y))) / (1 + (pow(x, 2)/2) + (pow(y, 2)/4)), 7)
+
+def calculate_b(x: str, z: str) -> float:
+    try:
+        x = float(x)
+        z = float(z)
+    except:
+        raise ValueError("X, Y и Z должны быть типа flat или int")
+
+    return round(x*(atan(z)+exp(-(x+3))), 6)
+
+if __name__ == '__main__':
+    input_x = input('Введите x: ')
+    input_y = input('Введите y: ')
+    input_z = input('Введите z: ')
+
+    a = calculate_a(input_x, input_y)
+    b = calculate_b(input_x, input_z)
+
+    print(f"a = {a}")
+    print(f"b = {b}")
+```
 
 ---
 
@@ -31,7 +63,27 @@ $$
 
 Решение на Python:
 
-```python:Task 2/Main_A.py```
+```python
+def to_descending(x: str, y: str) -> (float, float):
+    try:
+        x = float(x)
+        y = float(y)
+    except:
+        raise ValueError('X и Y должны иметь тип float или int')
+
+    if x < y:
+        return y, x
+
+    return x, y
+
+if __name__ == '__main__':
+    input_x = input('Введите X: ')
+    input_y = input('Введите Y: ')
+
+    input_x, input_y = to_descending(input_x, input_y)
+
+    print(f'X = {input_x}, Y = {input_y}')
+```
 
 #### Б (Задачи на применение оператора выбора `switch … case …`)
 
@@ -45,7 +97,41 @@ $$
 
 Решение на Python:
 
-```python:Task 2/Main_B.py```
+```python
+def get_mode_text(mode: str) -> str:
+    try:
+        mode = int(mode)
+    except:
+        raise ValueError('Режим должен быть типа int')
+
+    match mode:
+        case 1:
+            return '''Рекомендуемые параметры для режима стирки \'Хлопок\':
+                      Температура: 30-40°C
+                      Время стирки: 1-2 часа
+                      '''
+        case 2:
+            return '''Рекомендуемые параметры для режима стирки \'Синтетика\':
+                      Температура: 30-40°C
+                      Время стирки: 45-60 минут
+                      '''
+        case 3:
+            return '''Рекомендуемые параметры для режима стирки \'Шерсть\':
+                      Температура: 20-30°C
+                      Время стирки: 40-55 минут
+                      '''
+        case 4:
+            return '''Рекомендуемые параметры для режима стирки \'Быстрая стирка\':
+                      Температура: 30-40°C
+                      Время стирки: 15-30 минут
+                      '''
+        case _:
+            return 'Неизвестный режим стирки!'
+
+if __name__ == '__main__':
+    input_mode = input('Введите режим работы (1-4): ')
+    print(get_mode_text(input_mode))
+```
 
 ---
 
